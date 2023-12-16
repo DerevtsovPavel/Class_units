@@ -1,14 +1,14 @@
-#include "c_units.h"
+п»ї#include "c_units.h"
 #pragma once
 
 class Archer :public BaseUnit {
-	//поля унаследуем от BaseUnit
+	//РїРѕР»СЏ СѓРЅР°СЃР»РµРґСѓРµРј РѕС‚ BaseUnit
 public:
 	Archer(int x = 0, int y = 0);
 
-	/// наносим урон damag объекту enemy. result-переменная для подсчёта нанесённого урона
-	void set_damage(int damag, float& result, BaseUnit* enemy);
+	/// РЅР°РЅРѕСЃРёРј СѓСЂРѕРЅ damag РѕР±СЉРµРєС‚Сѓ enemy. result-РїРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ РїРѕРґСЃС‡С‘С‚Р° РЅР°РЅРµСЃС‘РЅРЅРѕРіРѕ СѓСЂРѕРЅР°
+	void set_damage (int damag, float& result, BaseUnit* enemy) override;
 
-	///перерасчёт stamina -> перерасчёт макс урона, защиты
-	void rebuild_st();
+	///РїРµСЂРµСЂР°СЃС‡С‘С‚ stamina -> РїРµСЂРµСЂР°СЃС‡С‘С‚ РјР°РєСЃ СѓСЂРѕРЅР°, Р·Р°С‰РёС‚С‹
+	void rebuild_st() override;
 };

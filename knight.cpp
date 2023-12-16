@@ -1,45 +1,45 @@
-#include "knight.h"
+п»ї#include "knight.h"
 
-///конструктор, в котором ставим объект на точку x,y
+///РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ, РІ РєРѕС‚РѕСЂРѕРј СЃС‚Р°РІРёРј РѕР±СЉРµРєС‚ РЅР° С‚РѕС‡РєСѓ x,y
 Knight::Knight(int x , int y )
 {
-	///остальное определено в c_units
+	///РѕСЃС‚Р°Р»СЊРЅРѕРµ РѕРїСЂРµРґРµР»РµРЅРѕ РІ c_units
 
-	damage[0] = 3;//мин урон
-	damage[1] = 18;//макс урон
-	armor = 25;//броня
-	protection = 7;//защита
-	range = 1;//дистанция атаки
-	coord[0] = x;//коорд х на поле
-	coord[1] = y;//коорд у на поле
+	damage[0] = 3;//РјРёРЅ СѓСЂРѕРЅ
+	damage[1] = 23;//РјР°РєСЃ СѓСЂРѕРЅ
+	armor = 18;//Р±СЂРѕРЅСЏ
+	protection = 7;//Р·Р°С‰РёС‚Р°
+	range = 1;//РґРёСЃС‚Р°РЅС†РёСЏ Р°С‚Р°РєРё
+	coord[0] = x;//РєРѕРѕСЂРґ С… РЅР° РїРѕР»Рµ
+	coord[1] = y;//РєРѕРѕСЂРґ Сѓ РЅР° РїРѕР»Рµ
 }
 
-/// наносим урон damag объекту enemy. result-переменная для подсчёта нанесённого урона
-void Knight::set_damage(int damag, float& result, BaseUnit* enemy)
+/// РЅР°РЅРѕСЃРёРј СѓСЂРѕРЅ damag РѕР±СЉРµРєС‚Сѓ enemy. result-РїРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ РїРѕРґСЃС‡С‘С‚Р° РЅР°РЅРµСЃС‘РЅРЅРѕРіРѕ СѓСЂРѕРЅР°
+void Knight::set_damage(int damag, float& result, BaseUnit* enemy) 
 {
 	if (damag == 0) return;
 
-	if (damag - enemy->get_protection() < 0) { result = 0; throw std::invalid_argument("Защита уклонением"); }
+	if (damag - enemy->get_protection() < 0) { result = 0; throw std::invalid_argument("Р—Р°С‰РёС‚Р° СѓРєР»РѕРЅРµРЅРёРµРј"); }
 
-	else if (enemy->get_armor() / damag >= 2) {//если броня превосходит урон в 2 и более раз
-		throw std::invalid_argument("Защита бронёй");
+	else if (enemy->get_armor() / damag >= 2) {//РµСЃР»Рё Р±СЂРѕРЅСЏ РїСЂРµРІРѕСЃС…РѕРґРёС‚ СѓСЂРѕРЅ РІ 2 Рё Р±РѕР»РµРµ СЂР°Р·
+		throw std::invalid_argument("Р—Р°С‰РёС‚Р° Р±СЂРѕРЅС‘Р№");
 		result = 0;
 	}
 
 	else {
-		float k = abs((damag - enemy->get_armor() - (1.0 * enemy->get_protection() / damag)));//расчитываем сколько урона действительно пройдёт
+		float k = abs((damag - enemy->get_armor() - (1.0 * enemy->get_protection() / damag)));//СЂР°СЃС‡РёС‚С‹РІР°РµРј СЃРєРѕР»СЊРєРѕ СѓСЂРѕРЅР° РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ РїСЂРѕР№РґС‘С‚
 		enemy->set_health(enemy->get_health() - k);
 		result = k;
-		std::string s = "Получил";
-		s = s + " " + std::to_string(k);//выводим пользователю сколько урона прошло
+		std::string s = "РџРѕР»СѓС‡РёР»";
+		s = s + " " + std::to_string(k);//РІС‹РІРѕРґРёРј РїРѕР»СЊР·РѕРІР°С‚РµР»СЋ СЃРєРѕР»СЊРєРѕ СѓСЂРѕРЅР° РїСЂРѕС€Р»Рѕ
 		throw std::invalid_argument(s);
 	}
 }
 
-///перерасчёт stamina -> перерасчёт макс урона, защиты
+///РїРµСЂРµСЂР°СЃС‡С‘С‚ stamina -> РїРµСЂРµСЂР°СЃС‡С‘С‚ РјР°РєСЃ СѓСЂРѕРЅР°, Р·Р°С‰РёС‚С‹
 void Knight::rebuild_st()
 {
-	stamina = stamina - 2;//быстрее теряет силы
+	stamina = stamina - 2;//Р±С‹СЃС‚СЂРµРµ С‚РµСЂСЏРµС‚ СЃРёР»С‹
 	set_max_damage();
 	set_protection();
 }

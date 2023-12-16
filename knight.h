@@ -1,18 +1,18 @@
-#include "c_units.h"
+п»ї#include "c_units.h"
 #pragma once
 
-///класс рыцарь, сделанный на основе BaseUnit
+///РєР»Р°СЃСЃ СЂС‹С†Р°СЂСЊ, СЃРґРµР»Р°РЅРЅС‹Р№ РЅР° РѕСЃРЅРѕРІРµ BaseUnit
 class Knight :public BaseUnit {
 
-///поля унаследуем от BaseUnit
+///РїРѕР»СЏ СѓРЅР°СЃР»РµРґСѓРµРј РѕС‚ BaseUnit
 
 public:
-	///конструктор, в котором ставим объект на точку x,y
+	///РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ, РІ РєРѕС‚РѕСЂРѕРј СЃС‚Р°РІРёРј РѕР±СЉРµРєС‚ РЅР° С‚РѕС‡РєСѓ x,y
 	Knight(int x = 0, int y = 0);
 
-	/// наносим урон damag объекту enemy. result-переменная для подсчёта нанесённого урона
-	void set_damage(int damag, float& result, BaseUnit* enemy);
+	/// РЅР°РЅРѕСЃРёРј СѓСЂРѕРЅ damag РѕР±СЉРµРєС‚Сѓ enemy. result-РїРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ РїРѕРґСЃС‡С‘С‚Р° РЅР°РЅРµСЃС‘РЅРЅРѕРіРѕ СѓСЂРѕРЅР°
+	void set_damage (int damag, float& result, BaseUnit* enemy) override;
 
-	///перерасчёт stamina -> перерасчёт макс урона, защиты
-	void rebuild_st();
+	///РїРµСЂРµСЂР°СЃС‡С‘С‚ stamina -> РїРµСЂРµСЂР°СЃС‡С‘С‚ РјР°РєСЃ СѓСЂРѕРЅР°, Р·Р°С‰РёС‚С‹
+	void rebuild_st() override;
 };

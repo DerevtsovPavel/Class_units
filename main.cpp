@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <time.h>
 //#include "c_units.h"
 #include "swordsmen.h"
@@ -6,6 +6,8 @@
 #include "knight.h"
 #include "Spearmen.h"
 #include "Archer.h"
+#pragma once
+
 
 
 using namespace std;
@@ -17,30 +19,30 @@ int main() {
 	setlocale(0, "Russian");
 	srand(time(nullptr));
 
-	int k = 0;//����
-	int c = 0;//��������� ����
-	float s;//����������� ���������� ����
-	float sum1=0 , sum2 = 0;//��� ������� ����� ����� �� ��� 
+	int k = 0;//шаги
+	int c = 0;//наносимый урон
+	float s;//вытаскиваем получаемый урон
+	float sum1=0 , sum2 = 0;//кто сколько урона нанёс за бой 
 	/*
-	/// a1 �������� � a2 �� ��������� �����
+	/// a1 подходит к a2 на дистанцию атаки
 	while (sqrt(pow(a1->get_x() - a2->get_x(), 2) + pow(a1->get_y() - a2->get_y(), 2)) > a1->get_range())
 	{
 		a1->go_forward();
 		k++;
-		cout << "��� " << k << endl;
-		cout << "����� ��� " << a1->get_st() << endl;
+		cout << "Шаг " << k << endl;
+		cout << "Запас сил " << a1->get_st() << endl;
 	}
 
-	cout << a1->get_x() << " " << a2->get_x() << endl;//������ ����������
+	cout << a1->get_x() << " " << a2->get_x() << endl;//вывели координаты
 
-	//������� ���� ������ � ������ ���� ��
+	//дерутся пока хотябы у одного есть хп
 	while ((a1->get_health() > 0) and (a2->get_health() > 0))
 	{
-		 c = 0;//��������� ����
-		try { c = a2->get_damage(a1->get_x(), a1->get_y()); }//����������� ���� ���� ����� ���������� �� �1
+		 c = 0;//наносимый урон
+		try { c = a2->get_damage(a1->get_x(), a1->get_y()); }//расчитываем урон если можем дотянуться до а1
 		catch (const exception& error) { cout << error.what() << endl; }
 
-		try {  a2->set_damage(c,s,a1); //a2 ������� ���� a1
+		try {  a2->set_damage(c,s,a1); //a2 наносит урон a1
 		
 		}
 		
@@ -51,11 +53,11 @@ int main() {
 
 		sum2 = sum2 + s;
 
-		if (a1->get_health() <= 0) { //���� �������� �1 ����� ��� ���� 0
+		if (a1->get_health() <= 0) { //если здоровье а1 равно или ниже 0
 
 			cout << "A2 win" << endl;
 			
-			continue;//������� �� �����
+			continue;//выходим из цикла
 		}
 
 		try { c = a1->get_damage(a2->get_x(), a2->get_y()); }
@@ -82,35 +84,35 @@ int main() {
 	delete a1;
 	delete a2;
 
-	cout << "A1 �����: " << sum1 << " �����" << endl;
-	cout << "A2 �����: " << sum2 << " �����" << endl;*/
+	cout << "A1 нанёс: " << sum1 << " урона" << endl;
+	cout << "A2 нанёс: " << sum2 << " урона" << endl;*/
 
 	swordsmen* sword = new swordsmen(1, 1);
 
-	cout << "������" << endl;
-	cout <<"��������: "<< sword->get_health() << endl;
-	cout << "����������: �=" << sword->get_x() << " y=" << sword->get_y() << endl;
+	cout << "Мечник" << endl;
+	cout <<"Здоровье: "<< sword->get_health() << endl;
+	cout << "Координаты: х=" << sword->get_x() << " y=" << sword->get_y() << endl;
 
 	rifle* rif = new rifle(20, 1);
-	cout << "�������" << endl;
-	cout << "��������: " << rif->get_health() << endl;
-	cout << "��������� ��������: " << rif->get_range() << endl;
+	cout << "Мушкетёр" << endl;
+	cout << "Здоровье: " << rif->get_health() << endl;
+	cout << "Дальность стрельбы: " << rif->get_range() << endl;
 
 	k = 0;
 	while (sqrt(pow(rif->get_x() - sword->get_x(), 2) + pow(rif->get_y() - sword->get_y(), 2)) > rif->get_range())
 	{
 		rif->go_back();
 		k++;
-		cout << "��� " << k << endl;
-		cout << "����� ��� " << rif->get_st() << endl;
+		cout << "Шаг " << k << endl;
+		cout << "Запас сил " << rif->get_st() << endl;
 	}
 
-	cout << rif->get_x() << " " << sword->get_x() << endl;//������ ����������
+	cout << rif->get_x() << " " << sword->get_x() << endl;//вывели координаты
 
 	while (sword->get_health() > 0)
 	{
 		try { c = rif->get_damage(sword->get_x(), sword->get_y());
-		if (c == 0) cout << "�����������" << endl;
+		if (c == 0) cout << "Перезарядка" << endl;
 		}
 		catch (const exception& error) { cout << error.what() << endl; }
 		try {
@@ -120,7 +122,7 @@ int main() {
 
 		catch (const exception& error)
 		{
-			cout << "������: " << error.what() << endl;
+			cout << "Мечник: " << error.what() << endl;
 		}
 	}
 
@@ -134,20 +136,20 @@ int main() {
 	k = 0;
 	kni->go_up();
 	k++;
-	cout << "��� " << k << endl;
-	cout << "����� ��� " << kni->get_st() << endl;
+	cout << "Шаг " << k << endl;
+	cout << "Запас сил " << kni->get_st() << endl;
 
 	
 	while (sqrt(pow(rif->get_x() - kni->get_x(), 2) + pow(rif->get_y() - kni->get_y(), 2)) > kni->get_range())
 	{
 		kni->go_forward();
 		k++;
-		cout << "��� " << k << endl;
-		cout << "����� ��� " << kni->get_st() << endl;
+		cout << "Шаг " << k << endl;
+		cout << "Запас сил " << kni->get_st() << endl;
 
 		try {
 			c = rif->get_damage(kni->get_x(), kni->get_y());
-			if (c == 0) cout << "�����������" << endl;
+			if (c == 0) cout << "Перезарядка" << endl;
 		}
 		catch (const exception& error) { cout << error.what() << endl; }
 		try {
@@ -157,34 +159,34 @@ int main() {
 
 		catch (const exception& error)
 		{
-			cout << "������: " << error.what() << endl;
+			cout << "Рыцарь: " << error.what() << endl;
 		}
 	}
 
-	//������� ���� ������ � ������ ���� ��
+	//дерутся пока хотябы у одного есть хп
 	while ((kni->get_health() > 0) and (rif->get_health() > 0))
 	{
-		c = 0;//��������� ����
-		try { c = kni->get_damage(rif->get_x(), rif->get_y()); }//����������� ���� ���� ����� ���������� �� �1
+		c = 0;//наносимый урон
+		try { c = kni->get_damage(rif->get_x(), rif->get_y()); }//расчитываем урон если kni можем дотянуться до rif
 		catch (const exception& error) { cout << error.what() << endl; }
 
 		try {
-			kni->set_damage(c, s, rif); //a2 ������� ���� a1
+			kni->set_damage(c, s, rif); //kni наносит урон rif
 
 		}
 
 		catch (const exception& error)
 		{
-			cout << "�������: " << error.what() << endl;
+			cout << "Мушкетёр: " << error.what() << endl;
 		}
 
 		
 
-		if (rif->get_health() <= 0) { //���� �������� �1 ����� ��� ���� 0
+		if (rif->get_health() <= 0) { //если здоровье а1 равно или ниже 0
 
-			cout << "������ win" << endl;
+			cout << "Рыцарь win" << endl;
 
-			continue;//������� �� �����
+			continue;//выходим из цикла
 		}
 
 		try { c = rif->get_damage(kni->get_x(), kni->get_y()); }
@@ -196,14 +198,14 @@ int main() {
 
 		catch (const exception& error)
 		{
-			cout << "������: " << error.what() << endl;
+			cout << "Рыцарь: " << error.what() << endl;
 		}
 
 		
 
 		if (kni->get_health() <= 0) {
 
-			cout << "������� win" << endl;
+			cout << "Мушкетёр win" << endl;
 
 		}
 	}
@@ -212,17 +214,155 @@ int main() {
 	delete kni;
 
 	cout << "--------" << endl;
-	Archer* ar1 = new Archer();
-	Archer* ar2 = new Archer(20);
+	
+	BaseUnit** army1 = new BaseUnit * [3]; //  динамический массив из указателей на BaseUnit
 
-	cout << "������ 2: " << ar2->get_x() << " " << ar2->get_y() << endl;
+	army1[0] = new Archer(0, 0);
+	army1[1] = new rifle(1, 0);
+	army1[2] = new Knight(3, 0);
 
-	rifle* rif1 = new rifle(1);
-	rifle* rif2 = new rifle(19);
+	cout << army1[0]->get_range() << endl;
 
-	Spearmen* sp1 = new Spearmen(2);
-	Spearmen* sp2 = new Spearmen(18);
+	BaseUnit** army2 = new BaseUnit * [3];
 
-	swordsmen* sw1 = new swordsmen(3);
-	swordsmen* sw2 = new swordsmen(17);
+	army2[0] = new Knight(10, 0);
+	army2[1] = new Spearmen(11, 0);
+	army2[2] = new Spearmen(11, 1);
+
+	while (sqrt(pow(army1[0]->get_x() - army2[1]->get_x(), 2) + pow(army1[0]->get_y() - army2[1]->get_y(), 2)) > army1[0]->get_range()) {
+		army1[0]->go_forward();
+	}
+	cout << "Лучник " << army1[0]->get_st() << endl;
+
+	while (sqrt(pow(army1[1]->get_x() - army2[0]->get_x(), 2) + pow(army1[1]->get_y() - army2[0]->get_y(), 2)) > army1[1]->get_range()) {
+		army1[1]->go_forward();
+	}
+	cout << "Мушкетёр " << army1[1]->get_st() << endl;
+
+	while (sqrt(pow(army1[2]->get_x() - army2[0]->get_x(), 2) + pow(army1[2]->get_y() - army2[0]->get_y(), 2)) > army1[2]->get_range()) {
+		army1[2]->go_forward();
+	}
+	cout << "Рыцарь " << army1[2]->get_st() << endl;
+
+
+
+	army2[2]->go_back();
+
+	while ((army1[2]->get_health() > 0) and (army2[2]->get_health() > 0))
+	{
+		c = 0;//наносимый урон
+		try { c = army2[2]->get_damage(army1[2]->get_x(), army1[2]->get_y()); }//расчитываем урон если spearmen можем дотянуться до knight
+		catch (const exception& error) { cout << error.what() << endl;
+		c = 0; //если дистанция недостаточна для удара
+		}
+
+		try {
+			/*здесь указатель на BaseUnit army2[i] приводится к типу указатель на Spearmen
+			т.к. set_damage объявлен в базовом классе, то использование dynamic(static)cast не нужно
+			cast-используются в том случае, когда нам нужно вызвать метод,
+			который есть только в классе потомка, но при объявлении указателей на базовый класс,
+			новые поля и методы обрезаются, а вызвать метод нужно.
+			в нашем примере это могло выглядеть как:
+			BaseUnit* s = Spearmen()
+			spearmen* s2 = dynamic_cast<spearmen*>(s)
+			s2->set_damage()
+			*/
+			army2[2]->set_damage(c, s, army1[2]); //spearmen наносит урон knight
+
+		}
+
+		catch (const exception& error)
+		{
+			cout << "Рыцарь: " << error.what() << endl;
+		}
+
+
+
+		if (army1[2]->get_health() <= 0) { //если здоровье knight равно или ниже 0
+
+			cout << "Копейщик win" << endl;
+
+			continue;//выходим из цикла
+		}
+
+		try { c = army1[2]->get_damage(army2[2]->get_x(), army2[2]->get_y()); }//если рыцарь сможет дотянуться до коп
+		catch (const exception& error) {
+			cout << error.what() << endl; //если дистанция недостаточна для удара
+			c = 0;
+		}
+		try {
+			army1[2]->set_damage(c, s, army2[2]);//рыцарь бьёт копейщика
+
+		}
+
+		catch (const exception& error)
+		{
+			cout << "Копейщик: " << error.what() << endl;
+		}
+
+		if (army2[2]->get_health() <= 0) {
+
+			cout << "Рыцарь win" << endl;
+
+		}
+	}
+
+	cout << "------------" << endl;
+	Knight* kni1 = new Knight;
+	swordsmen* sw = new swordsmen(1, 0);
+
+	while ((kni1->get_health() > 0) and (sw->get_health() > 0))
+	{
+		c = 0;//наносимый урон
+		try { c = sw->get_damage(kni1->get_x(), kni1->get_y()); }//расчитываем урон если sw можем дотянуться до knight
+		catch (const exception& error) {
+			cout << error.what() << endl;
+			c = 0; //если дистанция недостаточна для удара
+		}
+
+		try {
+			sw->set_damage(c, s, kni1); //sw наносит урон knight
+
+		}
+
+		catch (const exception& error)
+		{
+			cout << "Рыцарь: " << error.what() << endl;
+		}
+
+
+
+		if (kni1->get_health() <= 0) { //если здоровье knight равно или ниже 0
+
+			cout << "Мечник win" << endl;
+
+			continue;//выходим из цикла
+		}
+
+		try { c = kni1->get_damage(sw->get_x(), sw->get_y()); }//если рыцарь сможет дотянуться до мечника
+		catch (const exception& error) {
+			cout << error.what() << endl; //если дистанция недостаточна для удара
+			c = 0;
+		}
+		try {
+			kni1->set_damage(c, s, sw);//рыцарь бьёт мечника
+
+		}
+
+		catch (const exception& error)
+		{
+			cout << "Мечник: " << error.what() << endl;
+		}
+
+
+
+		if (sw->get_health() <= 0) {
+
+			cout << "Рыцарь win" << endl;
+
+		}
+	}
+
+
+
 }
