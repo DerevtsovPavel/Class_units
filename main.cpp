@@ -1,91 +1,27 @@
 ﻿#include <iostream>
 #include <time.h>
-//#include "c_units.h"
 #include "swordsmen.h"
 #include "rifle.h"
 #include "knight.h"
 #include "Spearmen.h"
 #include "Archer.h"
+#include "asserts.h"
 #pragma once
 
 
 
 using namespace std;
 
-int main() {
-	//BaseUnit* a1 = new BaseUnit(0,1);
-	//BaseUnit* a2 = new BaseUnit(5,1);
 
+int main() {
 	setlocale(0, "Russian");
 	srand(time(nullptr));
 
+	Test();
+
 	int k = 0;//шаги
 	int c = 0;//наносимый урон
-	float s;//вытаскиваем получаемый урон
-	float sum1=0 , sum2 = 0;//кто сколько урона нанёс за бой 
-	/*
-	/// a1 подходит к a2 на дистанцию атаки
-	while (sqrt(pow(a1->get_x() - a2->get_x(), 2) + pow(a1->get_y() - a2->get_y(), 2)) > a1->get_range())
-	{
-		a1->go_forward();
-		k++;
-		cout << "Шаг " << k << endl;
-		cout << "Запас сил " << a1->get_st() << endl;
-	}
-
-	cout << a1->get_x() << " " << a2->get_x() << endl;//вывели координаты
-
-	//дерутся пока хотябы у одного есть хп
-	while ((a1->get_health() > 0) and (a2->get_health() > 0))
-	{
-		 c = 0;//наносимый урон
-		try { c = a2->get_damage(a1->get_x(), a1->get_y()); }//расчитываем урон если можем дотянуться до а1
-		catch (const exception& error) { cout << error.what() << endl; }
-
-		try {  a2->set_damage(c,s,a1); //a2 наносит урон a1
-		
-		}
-		
-		catch (const exception& error)
-		{	
-			cout <<"A1: "<< error.what() << endl;
-		}
-
-		sum2 = sum2 + s;
-
-		if (a1->get_health() <= 0) { //если здоровье а1 равно или ниже 0
-
-			cout << "A2 win" << endl;
-			
-			continue;//выходим из цикла
-		}
-
-		try { c = a1->get_damage(a2->get_x(), a2->get_y()); }
-		catch (const exception& error) { cout << error.what() << endl; }
-		try { a1->set_damage(c,s,a2); 
-		
-		}
-
-		catch (const exception& error)
-		{
-			cout << "A2: " << error.what() << endl;
-		}
-
-		sum1 = sum1 + s;
-
-		if (a2->get_health() <= 0) {
-
-			cout << "A1 win" << endl;
-			
-		}
-	}
-
-	
-	delete a1;
-	delete a2;
-
-	cout << "A1 нанёс: " << sum1 << " урона" << endl;
-	cout << "A2 нанёс: " << sum2 << " урона" << endl;*/
+	float s;
 
 	swordsmen* sword = new swordsmen(1, 1);
 
@@ -257,7 +193,8 @@ int main() {
 		}
 
 		try {
-			/*здесь указатель на BaseUnit army2[i] приводится к типу указатель на Spearmen
+			/*здесь тип spearmen приводится к BaseUnit, в результате все поля и методы, 
+			которых нет в базовом классе будут отброшены
 			т.к. set_damage объявлен в базовом классе, то использование dynamic(static)cast не нужно
 			cast-используются в том случае, когда нам нужно вызвать метод,
 			который есть только в классе потомка, но при объявлении указателей на базовый класс,
@@ -265,7 +202,12 @@ int main() {
 			в нашем примере это могло выглядеть как:
 			BaseUnit* s = Spearmen()
 			spearmen* s2 = dynamic_cast<spearmen*>(s)
+			spearmen* s2 = (spearmen*)(s)
 			s2->set_damage()
+			или
+			dynamic_cast<Spearmen*> (s)->set_damage()
+
+			если преобразование невозможно, то dynamic_cast бросит исключение и вернёт nullptr
 			*/
 			army2[2]->set_damage(c, s, army1[2]); //spearmen наносит урон knight
 

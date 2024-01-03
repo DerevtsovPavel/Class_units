@@ -137,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Archer.h" />
+    <ClInclude Include="asserts.h" />
     <ClInclude Include="c_units.h" />
     <ClInclude Include="knight.h" />
     <ClInclude Include="rifle.h" />

@@ -42,7 +42,7 @@ int BaseUnit::get_damage(int x, int y)
 		int a = damage[0] + rand() % (damage[1] - damage[0] + 1);// наносим урон в диапазоне
 
 		hit++;//ув счётчик ударов
-		///если сделали 3 удара
+		///если сделали удар
 		if (hit == 1)
 		{
 			if (stamina != 0) rebuild_st();//снижаем стам

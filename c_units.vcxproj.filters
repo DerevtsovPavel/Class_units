@@ -56,5 +56,8 @@
     <ClInclude Include="Archer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="asserts.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
